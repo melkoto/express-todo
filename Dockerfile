@@ -23,4 +23,4 @@ ENV NODE_ENV=production
 RUN npm install --only=production
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
-CMD ["sh", "-c", "/wait-for-it.sh db:5432 -- npm install --only=development && npm run migrate && npm uninstall sequelize-cli && npm start"]
+CMD ["sh", "-c", "/wait-for-it.sh db:5432 -- npm run migrate && npm run seed && npm start"]
