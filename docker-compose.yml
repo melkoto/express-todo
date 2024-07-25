@@ -27,7 +27,7 @@ services:
       - db
     environment:
       NODE_ENV: production
-    command: ["./wait-for-it.sh", "db:5432", "--", "npm", "start"]
+    command: ["sh", "/wait-for-it.sh", "db:5432", "--", "npm", "start"]
     restart: unless-stopped
 
   db:
