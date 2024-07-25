@@ -9,10 +9,6 @@ RUN npm install
 
 COPY . .
 
-# Добавляем скрипт wait-for-it.sh
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
 # Установка образа для разработки
 FROM base AS development
 
@@ -25,4 +21,6 @@ FROM base AS production
 
 ENV NODE_ENV=production
 RUN npm install --only=production
-CMD ["sh", "/wait-for-it.sh", "db:5432", "--", "npm", "start"]
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+CMD ["sh", "-c", "/wait-for-it.sh db:5432 -- npm install --only=development && npm run migrate && npm uninstall sequelize-cli && npm start"]
