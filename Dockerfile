@@ -9,6 +9,8 @@ RUN npm install
 
 COPY . .
 
+COPY wait-for-it.sh /wait-for-it.sh
+
 # Установка образа для разработки
 FROM base AS development
 
@@ -21,4 +23,4 @@ FROM base AS production
 
 ENV NODE_ENV=production
 RUN npm install --only=production
-CMD ["npm", "start"]
+CMD ["./wait-for-it.sh", "db:5432", "--", "npm", "start"]

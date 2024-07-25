@@ -27,12 +27,13 @@ services:
       - db
     environment:
       NODE_ENV: production
+    command: ["./wait-for-it.sh", "db:5432", "--", "npm", "start"]
     restart: unless-stopped
 
   db:
     image: postgres:15
     env_file:
-      - .env
+      - .env.prod
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
