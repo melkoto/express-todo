@@ -1,4 +1,3 @@
-# Dockerfile
 FROM node:22-alpine
 
 WORKDIR /app
@@ -11,6 +10,6 @@ COPY . .
 
 ENV NODE_ENV=development
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD ["npm", "start"]

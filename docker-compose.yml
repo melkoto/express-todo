@@ -1,7 +1,8 @@
-version: '3.9'
+version: '3.8'
 services:
   app:
-    build: .
+    build:
+      context: .
     ports:
       - '4000:4000'
     env_file:
@@ -10,8 +11,20 @@ services:
       - db
     volumes:
       - .:/app
-    command: >
-      sh -c "npx sequelize db:migrate && npx sequelize db:seed:all && npm run dev"
+    restart: unless-stopped
+
+  app-prod:
+    build:
+      context: .
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env.prod
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
 
   db:
     image: postgres:15
