@@ -3,6 +3,7 @@ services:
   app:
     build:
       context: .
+      target: development
     ports:
       - '4000:4000'
     env_file:
@@ -11,11 +12,13 @@ services:
       - db
     volumes:
       - .:/app
+    command: npm run dev
     restart: unless-stopped
 
   app-prod:
     build:
       context: .
+      target: production
     ports:
       - '4000:4000'
     env_file:
