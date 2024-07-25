@@ -8,7 +8,7 @@
 docker compose up app db
 ```
 
-### Накатить базу данных
+### Накатить миграции
 
 ```bash
 docker compose exec app npx sequelize db:migrate
@@ -70,6 +70,7 @@ sudo apt-get install make
 ```
 
 ### Создать app директорию
+
 ```bash
 mkdir app
 cd app
@@ -95,29 +96,8 @@ POSTGRES_DB=
 ### Запустить контейнеры
 
 ```bash
-docker compose up app-prod db
+docker compose up --build app-prod db -d
 ```
-
-### Накатить миграции
-
-```bash
-docker compose exec app-prod npx sequelize db:migrate
-```
-
-### Накатить сиды
-
-```bash
-docker compose exec app-prod npx sequelize db:seed:all
-```
-
-#### Пояснение
-
-`app-prod` - имя контейнера с приложением для продакшена
-
-`docker compose up` - запускает контейнеры и создает их в фоне
-
-`docker compose exec app-prod npx sequelize db:migrate` - запускает контейнер с приложением для продакшена и выполняет
-команду на нем
 
 ## Makefile
 
@@ -215,4 +195,6 @@ docker  logs --tail 100 frontend
 ```
 
 ## Дополнительная информация
-`wait-for-it.sh` - скрипт для проверки соединения с базой данных и запуска контейнера с приложением в режиме реального времени. Файл скачан отсюда: https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+
+`wait-for-it.sh` - скрипт для проверки соединения с базой данных и запуска контейнера с приложением в режиме реального
+времени. Файл скачан отсюда: https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
