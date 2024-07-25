@@ -213,3 +213,6 @@ docker  logs --tail 100
 ```bash
 docker  logs --tail 100 frontend
 ```
+
+## Дополнительная информация
+`wait-for-it.sh` - скрипт для проверки соединения с базой данных и запуска контейнера с приложением в режиме реального времени. Файл скачан отсюда: https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
