@@ -13,14 +13,12 @@ COPY . .
 FROM base AS development
 
 ENV NODE_ENV=development
-RUN npm install --only=development
 CMD ["npm", "run", "dev"]
 
 # Установка образа для продакшена
 FROM base AS production
 
 ENV NODE_ENV=production
-RUN npm install --only=production
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 CMD ["sh", "-c", "/wait-for-it.sh db:5432 -- npm run migrate && npm run seed && npm start"]
