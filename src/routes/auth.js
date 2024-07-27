@@ -22,10 +22,8 @@ router.post('/register', [
         req.session.userId = user.id;
         req.session.save(err => {
             if (err) {
-                console.error('Session save error:', err);
                 return res.status(500).json({ error: 'Failed to save session' });
             }
-            console.log('Session saved successfully:', req.session);
             res.status(201).json(user);
         });
     } catch (error) {
@@ -58,10 +56,8 @@ router.post('/login', [
         req.session.userId = user.id;
         req.session.save(err => {
             if (err) {
-                console.error('Session save error:', err);
                 return res.status(500).json({ error: 'Failed to save session' });
             }
-            console.log('Session saved successfully:', req.session);
             res.status(200).json(user);
         });
     } catch (error) {
