@@ -1,3 +1,4 @@
+// models/user.js
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
@@ -8,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     name: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    password: DataTypes.STRING // Добавляем поле для пароля
   }, {
     sequelize,
     modelName: 'User',

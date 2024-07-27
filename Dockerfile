@@ -13,7 +13,9 @@ COPY . .
 FROM base AS development
 
 ENV NODE_ENV=development
-CMD ["npm", "run", "dev"]
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+CMD ["sh", "-c", "/wait-for-it.sh db:5432 -- npm run dev"]
 
 # Установка образа для продакшена
 FROM base AS production

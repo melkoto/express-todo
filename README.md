@@ -83,7 +83,7 @@ git clone https://github.com/${YOUR_USERNAME}/${PROJECT_NAME}.git
 cd ${PROJECT_NAME}
 ```
 
-### Добавить env и .env.prod файл. В env.prod добавить:
+### Добавить env и .env.production файл. В env.production добавить:
 
 ```
 NODE_ENV=production
