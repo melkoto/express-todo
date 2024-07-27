@@ -20,11 +20,15 @@ router.post('/register', [
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ name, email, password: hashedPassword });
         req.session.userId = user.id;
+
+        const userWithoutPassword = user.toJSON();
+        delete userWithoutPassword.password;
+
         req.session.save(err => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to save session' });
             }
-            res.status(201).json(user);
+            res.status(201).json(userWithoutPassword);
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -54,11 +58,15 @@ router.post('/login', [
         }
 
         req.session.userId = user.id;
+
         req.session.save(err => {
             if (err) {
                 return res.status(500).json({ error: 'Failed to save session' });
             }
-            res.status(200).json(user);
+            const userWithoutPassword = user.toJSON();
+            delete userWithoutPassword.password;
+
+            res.status(200).json(userWithoutPassword);
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -80,7 +88,11 @@ router.get('/me', (req, res) => {
     }
 
     User.findByPk(req.session.userId)
-        .then(user => res.json(user))
+        .then(user => {
+            const userWithoutPassword = user.toJSON();
+            delete userWithoutPassword.password;
+            return res.json(userWithoutPassword);
+        })
         .catch(error => res.status(500).json({ error: error.message }));
 });
 
