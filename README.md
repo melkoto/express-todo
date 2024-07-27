@@ -2,10 +2,23 @@
 
 ## Для dev
 
+### Создать .env файл
+```dotenv
+NODE_ENV=development
+
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+CLIENT_URL=http://localhost:5173
+SESSION_SECRET=your_session_secret
+
+```
+
 ### Запустить контейнеры
 
 ```bash
-docker compose up app db
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
 ### Накатить миграции
@@ -83,20 +96,24 @@ git clone https://github.com/${YOUR_USERNAME}/${PROJECT_NAME}.git
 cd ${PROJECT_NAME}
 ```
 
-### Добавить env и .env.production файл. В env.production добавить:
+### Добавить .env.production файл:
 
-```
+```dotenv
 NODE_ENV=production
 
 POSTGRES_USER=
 POSTGRES_PASSWORD=
 POSTGRES_DB=
+
+CLIENT_URL=
+SESSION_SECRET=
+
 ```
 
 ### Запустить контейнеры
 
 ```bash
-docker compose up --build app-prod db -d
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
 
 ## Makefile
