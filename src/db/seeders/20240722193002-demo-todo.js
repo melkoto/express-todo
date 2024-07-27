@@ -11,7 +11,6 @@ module.exports = {
     await queryInterface.bulkInsert('Todos', [
       {
         title: 'Buy groceries',
-        description: 'Milk, Bread, Butter, Eggs',
         completed: false,
         userId: userRows[0].id,
         createdAt: new Date(),
@@ -19,7 +18,6 @@ module.exports = {
       },
       {
         title: 'Read a book',
-        description: 'Finish reading "1984" by George Orwell',
         completed: false,
         userId: userRows[1].id,
         createdAt: new Date(),
@@ -27,7 +25,6 @@ module.exports = {
       },
       {
         title: 'Write blog post',
-        description: 'Write a new blog post about Node.js',
         completed: false,
         userId: userRows[2].id,
         createdAt: new Date(),
@@ -35,7 +32,6 @@ module.exports = {
       },
       {
         title: 'Exercise',
-        description: 'Go for a run in the park',
         completed: false,
         userId: userRows[3].id,
         createdAt: new Date(),
@@ -43,7 +39,6 @@ module.exports = {
       },
       {
         title: 'Cook dinner',
-        description: 'Prepare a healthy meal',
         completed: false,
         userId: userRows[4].id,
         createdAt: new Date(),

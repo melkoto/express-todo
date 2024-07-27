@@ -12,11 +12,9 @@ module.exports = {
             title: {
                 type: Sequelize.STRING
             },
-            description: {
-                type: Sequelize.STRING
-            },
             completed: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
             userId: {
                 type: Sequelize.INTEGER,
