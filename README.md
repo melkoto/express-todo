@@ -3,6 +3,7 @@
 ## Для dev
 
 ### Создать .env файл
+
 ```dotenv
 NODE_ENV=development
 
@@ -118,59 +119,120 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 ## Makefile
 
-1. **Обновление кода из репозитория:**
+1. Обновление кода из репозитория:
     ```bash
     make update-code
     ```
 
-2. **Пересборка и перезапуск контейнеров для dev окружения:**
+2. Пересборка и перезапуск контейнеров для dev окружения:
     ```bash
     make build
     ```
+3. Пересборка и перезапуск контейнеров для prod окружения:
+    ```bash
+    make build-prod
+    ```
 
-3. **Очистка неиспользуемых данных (без удаления томов):**
+4. Очистка неиспользуемых данных (без удаления томов):
     ```bash
     make clean
     ```
 
-4. **Запуск всех миграций:**
+5. Запуск всех миграций (для dev окружения):
     ```bash
     make migrate
     ```
+6. Запуск всех миграций (для prod окружения):
+    ```bash
+    make migrate-prod
+    ```
 
-5. **Запуск одной конкретной миграции:**
+7. Запуск одной конкретной миграции (для dev окружения):
     ```bash
     make migrate MIGRATION_NAMES="20230101120000-create-users.js"
     ```
 
-6. **Запуск нескольких конкретных миграций:**
+8. Запуск одной конкретной миграции (для prod окружения):
+    ```bash
+    make migrate-prod MIGRATION_NAMES="20230101120000-create-users.js"
+    ```
+
+9. Запуск нескольких конкретных миграций (для dev окружения):
     ```bash
     make migrate MIGRATION_NAMES="20230101120000-create-users.js 20230102120000-add-posts.js"
     ```
-
-7. **Отмена последней миграции:**
+   
+10. Запуск нескольких конкретных миграций (для prod окружения):
     ```bash
-    make migrate-undo
+    make migrate-prod MIGRATION_NAMES="20230101120000-create-users.js 20230102120000-add-posts.js"
     ```
 
-8. **Отмена конкретной миграции:**
-    ```bash
-    make migrate-undo MIGRATION_NAME="20230101120000-create-users.js"
-    ```
+11. Отмена последней миграции (для dev окружения):
+     ```bash
+     make migrate-undo
+     ```
+12. Отмена последней миграции (для prod окружения):
+     ```bash
+     make migrate-undo-prod
+     ```
 
-9. **Отмена всех миграций:**
-    ```bash
-    make migrate-undo-all
-    ```
+13. Отмена конкретной миграции (для dev окружения):
+     ```bash
+     make migrate-undo MIGRATION_NAME="20230101120000-create-users.js"
+     ```
+    
+14. Отмена конкретной миграции (для prod окружения):
+     ```bash
+     make migrate-undo-prod MIGRATION_NAME="20230101120000-create-users.js"
+     ```
 
-10. **Отмена всех миграций до конкретной:**
+15. Отмена всех миграций (для dev окружения):
+     ```bash
+     make migrate-undo-all
+     ```
+16. Отмена всех миграций (для prod окружения):
+     ```bash
+     make migrate-undo-prod-all
+     ```
+
+17. Отмена всех миграций до конкретной (для dev окружения):
     ```bash
     make migrate-undo-all MIGRATION_NAME="20230101120000-create-users.js"
     ```
+    
+18. Отмена всех миграций до конкретной (для prod окружения):
+    ```bash
+    make migrate-undo-prod-all MIGRATION_NAME="20230101120000-create-users.js"
+    ```
 
-11. **Полный процесс: обновление кода, пересборка и безопасная очистка (CleanUpdateBuild):**
+19. Полный процесс: обновление кода, пересборка и безопасная очистка (CleanUpdateBuild) (для dev окружения):
     ```bash
     make cub
+    ```
+
+20. Полный процесс: обновление кода, пересборка и безопасная очистка (CleanUpdateBuild) (для prod окружения):
+    ```bash
+    make cub-prod
+    ```
+
+21. Полный процесс: пересборка, безопасная очистка. Когда не нужно обновлять код (для dev окружения):
+    ```bash
+    make bc
+    ```
+
+22. Полный процесс: пересборка, безопасная очистка. Когда не нужно обновлять код (для prod окружения):
+    ```bash
+    make bc-prod
+    ```
+
+23. Сидинг базы данных (для dev окружения):
+    ```bash
+    make seed
+    ```
+
+24. Сидинг базы данных (для prod окружения):
+    ```bash
+    make seed-prod
     ```
 
 ## Команды Docker

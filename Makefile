@@ -56,10 +56,10 @@ migrate-undo:
 migrate-undo-prod:
 	@if [ -z "$(MIGRATION_NAME)" ]; then \
 		echo "Отмена последней миграции"; \
-		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app-prod npx sequelize-cli db:migrate:undo; \
+		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app npx sequelize-cli db:migrate:undo; \
 	else \
 		echo "Отмена миграции: $(MIGRATION_NAME)"; \
-		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app-prod npx sequelize-cli db:migrate:undo --name $(MIGRATION_NAME); \
+		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app npx sequelize-cli db:migrate:undo --name $(MIGRATION_NAME); \
 	fi
 
 # Отмена всех миграций для dev окружения
@@ -76,10 +76,10 @@ migrate-undo-all:
 migrate-undo-all-prod:
 	@if [ -z "$(MIGRATION_NAME)" ]; then \
 		echo "Отмена всех миграций"; \
-		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app-prod npx sequelize-cli db:migrate:undo:all; \
+		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app npx sequelize-cli db:migrate:undo:all; \
 	else \
 		echo "Отмена всех миграций до: $(MIGRATION_NAME)"; \
-		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app-prod npx sequelize-cli db:migrate:undo:all --name $(MIGRATION_NAME); \
+		docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app npx sequelize-cli db:migrate:undo:all --name $(MIGRATION_NAME); \
 	fi
 
 # Сидинг базы данных для dev окружения
@@ -88,7 +88,7 @@ seed:
 
 # Сидинг базы данных для prod окружения
 seed-prod:
-	docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app-prod npx sequelize-cli db:seed:all
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml exec app npx sequelize-cli db:seed:all
 
 # Полный процесс для dev окружения: обновление кода, пересборка и безопасная очистка (CleanUpdateBuild)
 cub: update-code build clean
