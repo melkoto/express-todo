@@ -1,11 +1,14 @@
 const express = require('express');
-const { Todo } = require('../models');
+const { User, Todo } = require('../db/models');
+const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
+
+router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
     try {
-        const todos = await Todo.findAll();
-        res.json(todos);
+        const users = await User.findAll();
+        res.json(users);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -13,11 +16,13 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const todo = await Todo.findByPk(req.params.id);
-        if (todo) {
-            res.json(todo);
+        const user = await User.findByPk(req.params.id, {
+            include: [Todo]
+        });
+        if (user) {
+            res.json(user);
         } else {
-            res.status(404).json({ error: 'Todo not found' });
+            res.status(404).json({ error: 'User not found' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -26,8 +31,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const todo = await Todo.create(req.body);
-        res.status(201).json(todo);
+        const user = await User.create(req.body);
+        res.status(201).json(user);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -35,14 +40,14 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const [updated] = await Todo.update(req.body, {
+        const [updated] = await User.update(req.body, {
             where: { id: req.params.id }
         });
         if (updated) {
-            const updatedTodo = await Todo.findByPk(req.params.id);
-            res.status(200).json(updatedTodo);
+            const updatedUser = await User.findByPk(req.params.id);
+            res.status(200).json(updatedUser);
         } else {
-            res.status(404).json({ error: 'Todo not found' });
+            res.status(404).json({ error: 'User not found' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -51,13 +56,13 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const deleted = await Todo.destroy({
+        const deleted = await User.destroy({
             where: { id: req.params.id }
         });
         if (deleted) {
             res.status(204).send();
         } else {
-            res.status(404).json({ error: 'Todo not found' });
+            res.status(404).json({ error: 'User not found' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });
