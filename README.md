@@ -19,19 +19,19 @@ SESSION_SECRET=your_session_secret
 ### Запустить контейнеры
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml up
 ```
 
 ### Накатить миграции
 
 ```bash
-docker compose exec app npx sequelize db:migrate
+docker compose -f docker-compose.dev.yml exec app npx sequelize db:migrate
 ```
 
 ### Накатить сиды
 
 ```bash
-docker compose exec app npx sequelize db:seed:all
+docker compose -f docker-compose.dev.yml exec app npx sequelize db:seed:all
 ```
 
 #### Пояснение
@@ -40,7 +40,7 @@ docker compose exec app npx sequelize db:seed:all
 
 `docker compose up` - запускает контейнеры и создает их в фоне
 
-`docker compose exec app npx sequelize db:migrate` - запускает контейнер с приложением и выполняет команду на нем
+`docker compose -f docker-compose.dev.yml exec app npx sequelize db:migrate` - запускает контейнер с приложением и выполняет команду на нем
 
 ## Для prod
 
@@ -114,7 +114,7 @@ SESSION_SECRET=
 ### Запустить контейнеры
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+docker-compose -f docker-compose.prod.yml up
 ```
 
 ## Makefile
