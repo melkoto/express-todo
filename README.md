@@ -19,7 +19,7 @@ SESSION_SECRET=your_session_secret
 ### Запустить контейнеры
 
 ```bash
-docker-compose -f docker-compose.dev.yml up
+docker compose -f docker-compose.dev.yml up
 ```
 
 ### Накатить миграции
@@ -114,7 +114,7 @@ SESSION_SECRET=
 ### Запустить контейнеры
 
 ```bash
-docker-compose -f docker-compose.prod.yml up
+docker compose -f docker-compose.prod.yml up
 ```
 
 ## Makefile
